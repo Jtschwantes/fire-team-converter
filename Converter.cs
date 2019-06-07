@@ -5,6 +5,7 @@ namespace Wololo
 {
     class Converter
     {
+
         //JArray data, center of the program
         public JArray jArray{get;set;}
 
@@ -12,60 +13,109 @@ namespace Wololo
         * Takes data from somewhere ands
         * sets it to our JArray property.
         **********************************/
-        //Data comes from a get request to a URL 
-        public void HttpIn(string url)
-        {
-            string data = HttpGet(url);
-            data = ToJsonArray(data);
-            jArray = Parse(data);
-        }
-
         //Data comes from a CSV fiele
         public void CsvIn(string path)
         {
-
+            try
+            {
+                jArray = In.jarrFromCSVFile(path);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error getting data from CSV file:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
         //Data comes from a JSON file
         public void JsonIn(string path)
         {
-
+            try
+            {
+                jArray = In.jarrFromURL(path);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error getting data from JSON file:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
         //Data comes from a C# object
-        public void ObjectIn(/* ??? */)
+        public void ObjectIn(dynamic obj)
         {
-
+            try
+            {
+                jArray = In.jarrFromObj(obj);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error getting data from Object:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
         /********  Out functions  *********
         * Takes the JSON data and outputs
         * it to somewhere.
         **********************************/
-        // 
-        public void HttpOut()
+        public void CsvOut(string path)
         {
-            //Makes a post request with our JSON data
+            try
+            {
+                Out.Csv(jArray, path);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error sending data to CSV file:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
-        public void CsvOut()
+        public void JsonOut(string path)
         {
-
+            try
+            {
+                Out.Json(jArray, path);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error sending data to JSON file:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
-        public void JsonOut()
+        public dynamic ObjectOut()
         {
-
-        }
-
-        public void ObjectOut()
-        {
-
+            try
+            {
+                return Out.Object(jArray);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error returning object:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
 
         public void ConsoleOut()
         {
-
+            try
+            {
+                Out.Console(jArray);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error printing object to console:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
         }
     }
 }

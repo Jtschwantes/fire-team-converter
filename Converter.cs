@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Wololo
@@ -44,11 +45,11 @@ namespace Wololo
         }
 
         //Data comes from a C# object
-        public void ObjectIn(dynamic obj)
+        public void ObjectIn(List<dynamic> objs)
         {
             try
             {
-                jArray = In.jarrFromObj(obj);
+                jArray = In.jarrFromObj(objs);
             }
             catch(Exception e)
             {
@@ -90,7 +91,7 @@ namespace Wololo
             }
         }
 
-        public dynamic ObjectOut()
+        public List<dynamic> ObjectOut()
         {
             try
             {

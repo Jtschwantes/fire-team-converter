@@ -1,8 +1,10 @@
 using System;
+using System.IO;
+using System.Dynamic;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using CsvHelper;
-using System.Dynamic;
-using System.IO;
 
 namespace Wololo
 {
@@ -35,7 +37,7 @@ namespace Wololo
             return eobject;
         }
 
-        private static List<dynamic> JsonToCSV(dynamic inputJson) 
+        private static List<dynamic> JsonToObj(dynamic inputJson) 
         {
             var collectedResults = new List<dynamic>();
 
@@ -61,7 +63,7 @@ namespace Wololo
             using (var writer = new StreamWriter("sections.csv"))
             using (var csv = new CsvWriter(writer))
             {
-                csv.WriteRecords(JsonToCSV(data));
+                csv.WriteRecords(JsonToObj(data));
             }
         }
  
@@ -72,17 +74,18 @@ namespace Wololo
 
         internal static void Json (JArray data, string path)
         {
-            
+            File.WriteAllText(path, JsonConvert.SerializeObject(data));
         }
 
         internal static dynamic Object (JArray data)
         {
-            return new ExpandoObject();
+
+            return JsonToObj(data);
         }
 
-        internal static string Console (JArray data)
+        internal static void Console (JArray data)
         {
-            return new String("wololo");
+            System.Console.WriteLine(data.ToString());
         }
     }
 }

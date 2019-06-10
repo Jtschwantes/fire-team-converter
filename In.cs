@@ -35,18 +35,6 @@ namespace Wololo
             return jarr;
         }
 
-        /// <summary>
-        /// Converts a string json to a JArray.
-        /// </summary>
-        /// <param name="json">Your string containing JSON</param>
-        internal static JArray jarrFromParse(string json)
-        {
-            JArray jarr = JArray.Parse(json);
-
-            return jarr;
-        }
-
-
         // Convert JSON file to JArray 
         ///<summary>
         /// A method in the <c>In</c> class. Takes a JSON file path, 

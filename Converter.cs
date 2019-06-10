@@ -10,6 +10,17 @@ namespace Wololo
         //JArray data, center of the program
         public JArray jArray{get;set;}
 
+        /// <summary>
+        /// Converts a string json to a JArray.
+        /// </summary>
+        /// <param name="json">Your string containing JSON</param>
+        public JArray Parse(string json)
+        {
+            JArray jarr = JArray.Parse(json);
+
+            return jarr;
+        }
+
         /********   In functions   ********
         * Takes data from somewhere ands
         * sets it to our JArray property.

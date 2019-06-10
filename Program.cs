@@ -29,15 +29,17 @@ namespace Wololo
 
         public static void Main()
         {
-            var json = makeHttpRequest().Result;
+            // Assignment Example
             var converter = new Converter();
-            JArray jArray = JArray.Parse(json);
-            converter.jArray = jArray;
+            converter.jArray = converter.Parse(makeHttpRequest().Result);
             converter.CsvOut("csv.csv.");
 
-            // var converter = new Converter();
-            // converter.CsvIn("csv.csv");
-            // converter.JsonOut("json.json");
+            // CSV-JSON Example
+            converter.CsvIn("csv.csv");
+            converter.JsonOut("json.json");
+
+            // JSON-Console Example
+            converter.ConsoleOut();
         }
     }
 }

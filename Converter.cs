@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
@@ -34,7 +34,7 @@ namespace Wololo
         {
             try
             {
-                jArray = In.jarrFromURL(path);
+                jArray = In.jarrFromJSONFile(path);
             }
             catch(Exception e)
             {

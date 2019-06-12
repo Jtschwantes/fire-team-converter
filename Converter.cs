@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Wololo
@@ -8,6 +9,17 @@ namespace Wololo
 
         //JArray data, center of the program
         public JArray jArray{get;set;}
+
+        /// <summary>
+        /// Converts a string json to a JArray.
+        /// </summary>
+        /// <param name="json">Your string containing JSON</param>
+        public JArray Parse(string json)
+        {
+            JArray jarr = JArray.Parse(json);
+
+            return jarr;
+        }
 
         /********   In functions   ********
         * Takes data from somewhere ands
@@ -33,7 +45,7 @@ namespace Wololo
         {
             try
             {
-                jArray = In.jarrFromURL(path);
+                jArray = In.jarrFromJSONFile(path);
             }
             catch(Exception e)
             {
@@ -44,11 +56,11 @@ namespace Wololo
         }
 
         //Data comes from a C# object
-        public void ObjectIn(dynamic obj)
+        public void ObjectIn(List<dynamic> objs)
         {
             try
             {
-                jArray = In.jarrFromObj(obj);
+                jArray = In.jarrFromObj(objs);
             }
             catch(Exception e)
             {
@@ -90,7 +102,7 @@ namespace Wololo
             }
         }
 
-        public dynamic ObjectOut()
+        public List<dynamic> ObjectOut()
         {
             try
             {

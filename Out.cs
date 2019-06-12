@@ -37,30 +37,21 @@ namespace Wololo
             return eobject;
         }
 
-        private static List<dynamic> JsonToObj(dynamic inputJson) 
+        private static List<dynamic> JsonToObj(JArray inputJson) 
         {
             var collectedResults = new List<dynamic>();
-
-            var deserializedJsonObject = Newtonsoft.Json.Linq.JToken.Parse(inputJson);
             
-            if (deserializedJsonObject is Newtonsoft.Json.Linq.JArray)
-            {
-                foreach (var component in deserializedJsonObject) 
+                foreach (var component in inputJson) 
                 {
                     collectedResults.Add(JobjToDynamic(component));
                 }
-            }
-            else
-            {
-                collectedResults.Add(JobjToDynamic(deserializedJsonObject));
-            }
 
             return collectedResults;
         }
 
         internal static void Csv (JArray data, string path)
         {
-            using (var writer = new StreamWriter("sections.csv"))
+            using (var writer = new StreamWriter(path))
             using (var csv = new CsvWriter(writer))
             {
                 csv.WriteRecords(JsonToObj(data));

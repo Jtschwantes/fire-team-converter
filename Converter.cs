@@ -116,6 +116,20 @@ namespace Wololo
             }
         }
 
+        public string JsonStringOut()
+        {
+            try
+            {
+                return Out.JsonString(jArray);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error sending data to JSON file:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
         public List<dynamic> ObjectOut()
         {
             try

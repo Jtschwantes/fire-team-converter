@@ -83,6 +83,11 @@ namespace Wololo
             File.WriteAllText(path, JsonConvert.SerializeObject(data));
         }
 
+        internal static string JsonString (JArray data)
+        {
+            return data.ToString();
+        }
+
         internal static dynamic Object (JArray data)
         {
 

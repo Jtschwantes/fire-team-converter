@@ -39,7 +39,7 @@ namespace Wololo
             converter.JsonOut("json.json");
 
             // JSON-Console Example
-            Console.WriteLine(converter.CsvStringOut());
+            Console.WriteLine(converter.JsonStringOut());
         
         }
     }

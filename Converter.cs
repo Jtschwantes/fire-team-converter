@@ -88,6 +88,20 @@ namespace Wololo
             }
         }
 
+        public string CsvStringOut()
+        {
+            try
+            {
+                return Out.CsvString(jArray);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error sending data to CSV file:");
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
         public void JsonOut(string path)
         {
             try

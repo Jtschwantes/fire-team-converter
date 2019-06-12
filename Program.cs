@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace Wololo
 {
@@ -14,8 +12,10 @@ namespace Wololo
             {
                 try
                 {
-                    string token = Environment.GetEnvironmentVariable("CANVAS_API_TOKEN");
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    // string token = Environment.GetEnvironmentVariable("CANVAS_API_TOKEN");
+                    string token = System.IO.File.ReadAllText("devapikey.txt");
+
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                     string response = await client.GetStringAsync("https://byui.instructure.com/api/v1/accounts/1/courses?by_subaccounts=25");
                     return response;
                 }
@@ -39,7 +39,8 @@ namespace Wololo
             converter.JsonOut("json.json");
 
             // JSON-Console Example
-            converter.ConsoleOut();
+            Console.WriteLine(converter.CsvStringOut());
+        
         }
     }
 }

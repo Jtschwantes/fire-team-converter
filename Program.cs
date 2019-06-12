@@ -16,7 +16,7 @@ namespace Wololo
                 {
                     string token = Environment.GetEnvironmentVariable("CANVAS_API_TOKEN");
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                    string response = await client.GetStringAsync("https://byui.instructure.com/api/v1/accounts/1/courses?by_subaccounts=25");
+                    string response = await client.GetStringAsync("https://byui.instructure.com/api/v1/courses/96/modules?include[]=items");
                     return response;
                 }
                 catch(HttpRequestException e)

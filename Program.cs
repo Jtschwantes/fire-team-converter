@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace Wololo
 {
@@ -39,7 +38,8 @@ namespace Wololo
             converter.JsonOut("json.json");
 
             // JSON-Console Example
-            converter.ConsoleOut();
+            Console.WriteLine(converter.JsonStringOut());
+        
         }
     }
 }

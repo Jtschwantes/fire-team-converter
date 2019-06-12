@@ -57,6 +57,21 @@ namespace Wololo
                 csv.WriteRecords(JsonToObj(data));
             }
         }
+
+        internal static string CsvString (JArray data)
+        {
+            using( var stream = new MemoryStream() )
+            using( var reader = new StreamReader( stream ) )
+            using( var writer = new StreamWriter( stream ) )
+            using( var csv = new CsvWriter( writer ) )
+            {
+                csv.WriteRecords( JsonToObj(data) );
+                writer.Flush();
+                stream.Position = 0;
+                var text = reader.ReadToEnd();
+                return text;
+            }
+        }
  
         internal static void Http (JArray data, string url)
         {
@@ -66,6 +81,11 @@ namespace Wololo
         internal static void Json (JArray data, string path)
         {
             File.WriteAllText(path, JsonConvert.SerializeObject(data));
+        }
+
+        internal static string JsonString (JArray data)
+        {
+            return data.ToString();
         }
 
         internal static dynamic Object (JArray data)
